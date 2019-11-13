@@ -48,6 +48,8 @@ module SSE
     # The default value for `reconnect_reset_interval` in {#initialize}.
     DEFAULT_RECONNECT_RESET_INTERVAL = 60
 
+    attr_reader :thread, :logger
+
     #
     # Creates a new SSE client.
     #
@@ -116,7 +118,7 @@ module SSE
 
       yield self if block_given?
 
-      Thread.new do
+      @thread = Thread.new do
         run_stream
       end
     end
